@@ -12,11 +12,11 @@ APIDOC_DEFAULT_DOCUMENTER_CLASSES = getattr(
 )
 
 
-def get_view_description(view, html=False):
+def get_view_description(view_cls, html=False, request=None):
     documenters = []
 
-    if hasattr(view, 'documenter_classes'):
-        for cls in view.documenter_classes:
+    if hasattr(view_cls, 'documenter_classes'):
+        for cls in view_cls.documenter_classes:
             documenters.append(cls())
     else:
         for cls in APIDOC_DEFAULT_DOCUMENTER_CLASSES:
@@ -24,7 +24,7 @@ def get_view_description(view, html=False):
             documenters.append(documenter_class())
 
     for documenter in documenters:
-        description = documenter.get_description(view, html)
+        description = documenter.get_description(view_cls, html, request)
         if description:
             return description
 
@@ -32,10 +32,10 @@ def get_view_description(view, html=False):
 
 
 class Documenter(object):
-    def get_description(self, view, html=True):
+    def get_description(self, view_cls, html=True, request=None):
         if html:
-            return self.process(self.get_content(view, html))
-        return self.get_content(view, html)
+            return self.process(self.get_content(view_cls, html, request))
+        return self.get_content(view_cls, html, request=None)
 
 
 class RSTFilesDocumenter(Documenter, FileContentMixin, MarkupProcessMixin):

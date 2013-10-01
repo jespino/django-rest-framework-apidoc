@@ -11,11 +11,14 @@ from rest_framework.utils.formatting import dedent
 
 # Content Mixins
 class FileContentMixin(object):
-    def get_content(self, view, html=True):
+    def get_content(self, view_cls, html=True, request=None):
+        if not request:
+            return ""
+
         if hasattr(self, 'extension'):
-            relpath = view.request._request.resolver_match.url_name + self.extension
+            relpath = request._request.resolver_match.url_name + self.extension
         else:
-            relpath = view.request._request.resolver_match.url_name
+            relpath = request._request.resolver_match.url_name
 
         description_path = os.path.join(
             getattr(settings, 'APIDOC_DOCUMENTATION_PATH', 'apidoc'),
@@ -29,8 +32,8 @@ class FileContentMixin(object):
 
 
 class DocStringContentMixin(object):
-    def get_content(self, view, html=True):
-        return dedent(view.__doc__ or "")
+    def get_content(self, view_cls, html=True, request=None):
+        return dedent(view_cls.__doc__ or "")
 
 
 # Process Mixins
