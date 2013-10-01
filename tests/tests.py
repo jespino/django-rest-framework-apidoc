@@ -11,9 +11,8 @@ class DummyObject(object):
 
 class RequestMock(object):
     def __init__(self, url_name):
-        self._request = DummyObject()
-        self._request.resolver_match = DummyObject()
-        self._request.resolver_match.url_name = url_name
+        self.resolver_match = DummyObject()
+        self.resolver_match.url_name = url_name
 
 
 class TestView(APIView):

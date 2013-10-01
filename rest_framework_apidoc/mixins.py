@@ -16,9 +16,9 @@ class FileContentMixin(object):
             return ""
 
         if hasattr(self, 'extension'):
-            relpath = request._request.resolver_match.url_name + self.extension
+            relpath = request.resolver_match.url_name + self.extension
         else:
-            relpath = request._request.resolver_match.url_name
+            relpath = request.resolver_match.url_name
 
         description_path = os.path.join(
             getattr(settings, 'APIDOC_DOCUMENTATION_PATH', 'apidoc'),
