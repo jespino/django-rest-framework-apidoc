@@ -8,7 +8,7 @@ This support file based documentation and other markup languages like Restructur
 Configuration
 -------------
 
-To configure apidoc in djangorestframework version <= 2.3.X, you need to monkey
+To configure apidoc in djangorestframework version <= 2.3.8, you need to monkey
 patch it. Add this line in a very first loaded models module
 
 .. code:: python
