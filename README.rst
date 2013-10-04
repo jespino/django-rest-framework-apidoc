@@ -11,13 +11,15 @@ Configuration
 To configure apidoc in djangorestframework version <= 2.3.8, you need to monkey
 patch it. Add this line in a very first loaded models module
 
-.. code:: python
+.. code::
+
   from rest_framework_apidoc.monkey import patch_api_view; patch_api_view()
 
 Then you have to configure your `VIEW_DESCRIPTION_FUNCTION` of `REST_FRAMEWORK`
 setting to use the rest_framework_apidoc version:
 
-.. code:: python
+.. code::
+
   REST_FRAMEWORK = {
       ...,
       'VIEW_DESCRIPTION_FUNCTION': 'rest_framework_apidoc.apidoc.get_view_description',
@@ -26,7 +28,8 @@ setting to use the rest_framework_apidoc version:
 
 Then you can configure your apidoc default documenter classes:
 
-.. code:: python
+.. code::
+
   APIDOC_DEFAULT_DOCUMENTER_CLASSES = ['rest_framework_apidoc.apidoc.MDDocStringDocumenter']
 
 The `APIDOC_DEFAULT_DOCUMENTER_CLASSES` default value is `['rest_framework_apidoc.apidoc.MDDocStringsDocumenter']`
@@ -35,7 +38,8 @@ If you use file based documentation, you can set the path to your documentation 
 
 You can override the default setting for a APIView adding the attribute `documenter_classes`.
 
-.. code:: python
+.. code::
+
   APIDOC_DOCUMENTATION_PATH = "my-api-documentation"
 
 The `APIDOC_DOCUMENTATION_PATH` default value is `apidoc`
